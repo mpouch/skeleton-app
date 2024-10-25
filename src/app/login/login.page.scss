@@ -1,0 +1,50 @@
+.centered-content {
+    background-image: url("../../assets/img/login.jpg");
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 50px;
+}
+
+.app-title {
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 35px;
+    color: white;
+}
+
+.login-form-container {
+    padding: 25px;
+    width: 90%;
+    background-color: white;
+    border-radius: 20px;
+    color: black;
+}
+
+.login-form-container h2 {
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 26px
+}
+
+.input-field {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.login-button {
+    color: white;
+    --background: rgb(181, 129, 197);
+    --background-hover: rgb(181, 129, 197);
+    --background-activated: rgb(129, 76, 145);
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+}
