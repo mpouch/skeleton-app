@@ -22,15 +22,19 @@
         <ion-select-option *ngFor="let niv of niveles" [value]="niv.id">{{niv.nivel}}</ion-select-option>
       </ion-select>
 
-      <!-- <mat-form-field>
-        <mat-label>Choose a date</mat-label>
+      <mat-form-field>
+        <mat-label>Fecha de nacimiento</mat-label>
         <input matInput [matDatepicker]="picker">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>       -->
+      </mat-form-field>
+
+      <div class="btn-container">
+        <ion-button class="login-button">Limpiar</ion-button>
+        <ion-button class="login-button">Mostrar</ion-button>
+      </div>
   
-      <ion-button class="login-button">Ingresar</ion-button>    
     </div>
   </div>
 
