@@ -11,11 +11,27 @@
 
     <div class="login-form-container">
       <h2>Login</h2>
-      <ion-input class="input-field" label="Usuario" labelPlacement="stacked" placeholder="Ingrese su nombre de usuario"></ion-input>
-      <ion-input class="input-field" label="Contraseña" labelPlacement="stacked" type="password" value="password"></ion-input>
-      <ion-button class="login-button">Ingresar</ion-button>    
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <ion-input formControlName="username" class="input-field" label="Usuario" labelPlacement="stacked" placeholder="Ingrese su nombre de usuario"></ion-input>
+        <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.touched || loginForm.get('username')?.dirty)">
+          <small *ngIf="loginForm.get('username')?.errors?.['required']">El nombre de usuario es requerido.</small>
+          <small *ngIf="loginForm.get('username')?.errors?.['longitudInvalida']">El nombre de usuario debe tener entre 3 y 8 caracteres.</small>
+        </div>
+
+        <ion-input formControlName="password" class="input-field" label="Contraseña" labelPlacement="stacked" type="password" placeholder="Ingrese su contraseña"></ion-input>
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida.</small>
+        </div>
+
+        <ion-button
+          class="login-button"
+          type="submit"
+          [disabled]="loginForm.invalid">
+          Ingresar
+        </ion-button>
+      </form>    
     </div>
 
   </div>
-
 </ion-content>
