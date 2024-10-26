@@ -10,10 +10,10 @@ import { Validators, FormBuilder} from '@angular/forms';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
+  constructor(private formBuilder: FormBuilder) {
+    this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, longitudValida]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, validarContrasenna]]
     })
   }
 
@@ -36,6 +36,13 @@ export const longitudValida = (campo: AbstractControl): ValidationErrors | null 
   }
 
   return null;
+}
 
+export const validarContrasenna = (campo: AbstractControl): ValidationErrors | null => {
+  const valor = campo.value;
+  if (valor && valor.length !== 4) {
+    return {contrasennaInvalida: true};
+  }
 
+  return null;
 }

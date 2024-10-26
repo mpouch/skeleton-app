@@ -22,14 +22,13 @@
         <ion-input formControlName="password" class="input-field" label="Contraseña" labelPlacement="stacked" type="password" placeholder="Ingrese su contraseña"></ion-input>
         <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">
           <small *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida.</small>
+          <small *ngIf="loginForm.get('password')?.errors?.['contrasennaInvalida']">La contraseña debe tener 4 caracteres.</small>
         </div>
 
-        <ion-button
-          class="login-button"
-          type="submit"
-          [disabled]="loginForm.invalid">
+        <ion-button class="login-button" type="submit" [disabled]="loginForm.invalid">
           Ingresar
         </ion-button>
+
       </form>    
     </div>
 
