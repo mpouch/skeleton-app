@@ -7,6 +7,25 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  nombre: string = "Juan";
+
+  niveles:any[]=[
+    {id:1,nivel:"Básica Incompleta"},
+    {id:2,nivel:"Básica Completa"},
+    {id:3,nivel:"Media Incompleta"},
+    {id:4,nivel:"Media Completa"},
+    {id:5,nivel:"Media Incompleta"},
+    {id:6,nivel:"Superior Completa"}
+  ]
+
+  data:any={
+    nombre:"",
+    apellido:"",
+    educacion:"",
+    nacimiento:""
+  };
+
+
   constructor() {}
 
 }
