@@ -10,13 +10,16 @@ import { LoginPage } from './login.page';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {MatDialogModule} from '@angular/material/dialog';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   declarations: [LoginPage]
 })

@@ -13,18 +13,19 @@
   <div class="main-container">
     <div class="login-form-container">
       <h3>Información</h3>
-      <ion-input class="input-field" label="Nombre" labelPlacement="stacked" placeholder="Ingrese su nombre"></ion-input>
-      <ion-input class="input-field" label="Apellido" labelPlacement="stacked" placeholder="Ingrese su apellido"></ion-input>
-      <ion-input class="input-field" label="Contraseña" labelPlacement="stacked" type="password" value="password"></ion-input>
+      <ion-input class="input-field" label="Nombre" labelPlacement="stacked" [(ngModel)]="data.nombre"
+        placeholder="Ingrese su nombre"></ion-input>
+      <ion-input class="input-field" label="Apellido" labelPlacement="stacked" [(ngModel)]="data.apellido"
+        placeholder="Ingrese su apellido"></ion-input>
 
       <ion-label position="stacked" class="ion-padding-bottom">Educación</ion-label>
-      <ion-select placeholder="Seleccione nivel" [(ngModel)]="data.educacion">
+      <ion-select class="container-educacion" placeholder="Seleccione nivel" [(ngModel)]="data.educacion">
         <ion-select-option *ngFor="let niv of niveles" [value]="niv.id">{{niv.nivel}}</ion-select-option>
       </ion-select>
 
       <mat-form-field>
         <mat-label>Fecha de nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="data.nacimiento">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -32,9 +33,9 @@
 
       <div class="btn-container">
         <ion-button class="login-button">Limpiar</ion-button>
-        <ion-button class="login-button">Mostrar</ion-button>
+        <ion-button (click)="openDialog()" class="login-button">Mostrar</ion-button>
       </div>
-  
+
     </div>
   </div>
 
@@ -45,6 +46,6 @@
 
 <ion-footer>
   <ion-toolbar>
-    App desarrollada por: 
+    App desarrollada por:
   </ion-toolbar>
 </ion-footer>

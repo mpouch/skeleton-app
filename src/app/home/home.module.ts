@@ -9,6 +9,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './dialog.component';
 
 @NgModule({
   imports: [
@@ -19,8 +22,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonModule,
+    MatDialogModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, DialogComponent]
 })
 export class HomePageModule {}
