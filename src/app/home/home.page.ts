@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
@@ -15,7 +15,6 @@ export class HomePage {
   @ViewChildren(IonInput, {read: ElementRef}) inputs: QueryList<ElementRef<HTMLIonInputElement>> | undefined;
 
   username: string | undefined;
-  private animation: Animation | undefined;
 
   niveles:any[]=[
     {id:1,nivel:"Básica Incompleta"},
@@ -77,9 +76,4 @@ export class HomePage {
       nacimiento: ''
     }
   }
-
-  // async playAnimation() {
-  //   await this.animation?.play();
-  //   this.animation?.stop();
-  // }
 }
