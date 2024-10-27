@@ -25,7 +25,7 @@
           <small *ngIf="loginForm.get('password')?.errors?.['contrasennaInvalida']">La contraseña debe tener 4 caracteres.</small>
         </div>
 
-        <ion-button class="login-button" type="submit" [disabled]="loginForm.invalid">
+        <ion-button [routerLink]="['/home']" class="login-button" type="submit" [disabled]="loginForm.invalid">
           Ingresar
         </ion-button>
 
