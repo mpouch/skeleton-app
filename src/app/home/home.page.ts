@@ -2,7 +2,6 @@ import { Component, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
-import type { Animation } from '@ionic/angular';
 import { AnimationController, IonInput } from '@ionic/angular';
 
 @Component({
@@ -12,8 +11,11 @@ import { AnimationController, IonInput } from '@ionic/angular';
 })
 
 export class HomePage {
+
+  // Obtener los inputs para implementar la animación al limpiar el form
   @ViewChildren(IonInput, {read: ElementRef}) inputs: QueryList<ElementRef<HTMLIonInputElement>> | undefined;
 
+  // Variable para recuperar username desde login
   username: string | undefined;
 
   niveles:any[]=[
@@ -51,7 +53,7 @@ export class HomePage {
         .iterations(1)
         .fromTo('transform', 'translateX(0px)', 'translateX(100px)')
         .fromTo('opacity', '1', '0.2');
-        animation.onFinish(() => animation.stop());
+        animation.onFinish(() => animation.stop()); // Devuelve el input a su lugar original
         animation.play();
       })
     }
@@ -68,6 +70,7 @@ export class HomePage {
     })
   }
 
+  // Devuelve el form a su estado original
   cleanForm() {
     this.data = {
       nombre: '',
