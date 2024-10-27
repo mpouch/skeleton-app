@@ -32,7 +32,7 @@
       </mat-form-field>
 
       <div class="btn-container">
-        <ion-button class="login-button">Limpiar</ion-button>
+        <ion-button (click)="cleanForm(); playAnimation()" class="login-button">Limpiar</ion-button>
         <ion-button (click)="openDialog()" class="login-button">Mostrar</ion-button>
       </div>
 

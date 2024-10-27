@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
+import type { Animation } from '@ionic/angular';
+import { AnimationController, IonInput } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,10 @@ import { DialogComponent } from './dialog.component';
 })
 
 export class HomePage {
+  @ViewChildren(IonInput, {read: ElementRef}) inputs: QueryList<ElementRef<HTMLIonInputElement>> | undefined;
 
   username: string | undefined;
+  private animation: Animation | undefined;
 
   niveles:any[]=[
     {id:1,nivel:"Básica Incompleta"},
@@ -29,14 +33,29 @@ export class HomePage {
     nacimiento:""
   };
 
-
   // Se reciben los datos desde la página login
-  constructor(private route: ActivatedRoute, private dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, private animationCtrl: AnimationController) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.username = params['username'];
     })
+  }
+
+  playAnimation() {
+    if (this.inputs) {
+      this.inputs.forEach(input => {
+        const animation = this.animationCtrl
+        .create()
+        .addElement(input.nativeElement)
+        .duration(1000)
+        .iterations(1)
+        .fromTo('transform', 'translateX(0px)', 'translateX(100px)')
+        .fromTo('opacity', '1', '0.2');
+        animation.onFinish(() => animation.stop());
+        animation.play();
+      })
+    }
   }
 
   openDialog() {
@@ -50,4 +69,17 @@ export class HomePage {
     })
   }
 
+  cleanForm() {
+    this.data = {
+      nombre: '',
+      apellido: '',
+      educacion: '',
+      nacimiento: ''
+    }
+  }
+
+  // async playAnimation() {
+  //   await this.animation?.play();
+  //   this.animation?.stop();
+  // }
 }
