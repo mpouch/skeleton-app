@@ -1,5 +1,6 @@
 .centered-content {
-    background-image: url("../../assets/img/login.jpg");
+    background-image: url("../../assets/img/login4.png");
+    background-size: cover;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -16,18 +17,28 @@
 }
 
 .app-title {
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-weight: 700;
-    font-size: 35px;
+    letter-spacing: -0.02em;
+    font-size: 40px;
     color: white;
+}
+
+.app-subtitle {
+    font-family: system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 15px;
+    color: rgb(192, 192, 192);
 }
 
 .login-form-container {
     padding: 25px;
     width: 90%;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.281);
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
     border-radius: 20px;
-    color: black;
+    color: white;
 }
 
 .login-form-container h2 {
@@ -43,8 +54,8 @@
 
 .login-button {
     color: white;
-    --background: rgb(181, 129, 197);
-    --background-hover: rgb(181, 129, 197);
-    --background-activated: rgb(129, 76, 145);
+    --background: rgb(59, 47, 92);
+    --background-hover: rgb(48, 38, 75);
+    --background-activated: rgb(34, 28, 53);
     --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
 }
