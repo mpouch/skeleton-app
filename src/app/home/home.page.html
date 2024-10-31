@@ -1,50 +1,52 @@
 <ion-header>
-
   <ion-toolbar>
     <ion-title>Skeleton App</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <div class="welcome-message">
-    Bienvenido, {{username}}.
+  <div class="page-title-container">
+    <h1 class="page-title">Inicio</h1>
   </div>
 
-  <div class="main-container">
-    <div class="login-form-container">
-      <h3>Información</h3>
-      <ion-input class="input-field" label="Nombre" labelPlacement="stacked" [(ngModel)]="data.nombre"
-        placeholder="Ingrese su nombre"></ion-input>
-      <ion-input class="input-field" label="Apellido" labelPlacement="stacked" [(ngModel)]="data.apellido"
-        placeholder="Ingrese su apellido"></ion-input>
+  <div class="recently-added-container">
+    <div class="section-title-container">
+      <h2 class="section-title">Agregados recientemente</h2>
+    </div>
+    <div class="section-content-container">
+      Contenido
+    </div>
+  </div>
 
-      <ion-label position="stacked" class="ion-padding-bottom">Educación</ion-label>
-      <ion-select class="container-educacion" placeholder="Seleccione nivel" [(ngModel)]="data.educacion">
-        <ion-select-option *ngFor="let niv of niveles" [value]="niv.id">{{niv.nivel}}</ion-select-option>
-      </ion-select>
-
-      <mat-form-field>
-        <mat-label>Fecha de nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="data.nacimiento">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <div class="btn-container">
-        <ion-button (click)="cleanForm(); playAnimation()" class="login-button">Limpiar</ion-button>
-        <ion-button (click)="openDialog()" class="login-button">Mostrar</ion-button>
-      </div>
-
+  <div class="recommended-container">
+    <div class="section-title-container">
+      <h2 class="section-title">Recomendados</h2>
+    </div>
+    <div class="section-content-container">
+      Contenido
     </div>
   </div>
 
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    App desarrollada por:
-  </ion-toolbar>
-</ion-footer>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="home">
+      <ion-icon name="home-outline"></ion-icon>
+      Inicio
+    </ion-tab-button>
+
+    <ion-tab-button tab="library">
+      <ion-icon name="library"></ion-icon>
+      Biblioteca
+    </ion-tab-button>
+
+    <ion-tab-button tab="search">
+      <ion-icon name="search"></ion-icon>
+      Buscar
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>
