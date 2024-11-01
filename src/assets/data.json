@@ -6,6 +6,7 @@
         "year": 1967,
         "genre": "Realismo mágico",
         "coverImage": "https://m.media-amazon.com/images/I/A1lNJP8sC6L._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/A1lNJP8sC6L._AC_UY218_.jpg",
         "description": "Cien años de soledad es una novela del escritor colombiano Gabriel García Márquez que narra la historia de la familia Buendía y su relación con el pueblo ficticio de Macondo."
     },
     {
@@ -15,6 +16,7 @@
         "year": 1949,
         "genre": "Distópico",
         "coverImage": "https://m.media-amazon.com/images/I/91VsLImyJgL._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/91VsLImyJgL._AC_UY218_.jpg",
         "description": "La novela 1984 de George Orwell narra la historia de un futuro distópico en el que un gobierno totalitario controla cada aspecto de la vida de los ciudadanos."
     },
     {
@@ -24,6 +26,7 @@
         "year": 1925,
         "genre": "Drama",
         "coverImage": "https://m.media-amazon.com/images/I/61z0MrB6qOS._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/61z0MrB6qOS._AC_UY218_.jpg",
         "description": "Jay Gatsby, un hombre atractivo y misterioso, ha vuelto de los campos de batalla en Europa e intenta reconquistar a Daisy, al principio con amagos de opulencia."
     },
     {
@@ -33,6 +36,7 @@
         "year": 1963,
         "genre": "Antinovela",
         "coverImage": "https://m.media-amazon.com/images/I/61Hje5q9CRL._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/6134Ss0aLCL._AC_UY218_.jpg",
         "description": "El amor turbulento de Oliveira y La Maga, los amigos del Club de la Serpiente, las caminatas por Paría en busca del cielo y el infierno tienen su reverso en la aventura simétrica de Oliveira, Talira y Traveler en un Buenos Aires teñido por el recuerdo."
     },
     {
@@ -42,6 +46,7 @@
         "year": 1813,
         "genre": "Romance",
         "coverImage": "https://m.media-amazon.com/images/I/51m6S-elsrL.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/51m6S-elsrL._AC_UY218_.jpg",
         "description": "Elizabeth, una de las hijas de los Bennet, empezará una singular relación con Darcy, uno de los amigos de Bingley, que desencadenará esta historia de orgullo y prejuicios entre los dos hasta llegar a conocer el verdadero amor."
     },
     {
@@ -51,6 +56,7 @@
         "year": 1847,
         "genre": "Romance",
         "coverImage": "https://m.media-amazon.com/images/I/71qdlA1lNqL._SL1000_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/71qdlA1lNqL._AC_UY218_.jpg",
         "description": "Una historia que lleva a sus máximos extremos el amor y la venganza despiadada del amargado Heathcliff, que una vez alcanzada la riqueza regresa al territorio de su infancia para recuperar a su amor de juventud, del que se vio privado por su bajo estrato social."
     },
     {
@@ -60,6 +66,7 @@
         "year": 1957,
         "genre": "Fantasía",
         "coverImage": "https://m.media-amazon.com/images/I/91GGJZ19aEL._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/91GGJZ19aEL._AC_UY218_.jpg",
         "description": "En la adormecida e idílica Comarca, un joven hobbit recibe un encargo: custodiar el Anillo Único y emprender el viaje para su destrucción en la Grieta del Destino."
     },
     {
@@ -69,6 +76,7 @@
         "year": 2018,
         "genre": "Fantasía",
         "coverImage": "https://m.media-amazon.com/images/I/81POqvuiqTL._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/71N+KGyoYYL._AC_UY218_.jpg",
         "description": "Circe es una niña rara: carece de los poderes de su padre y de la agresiva capacidad de seducción de su madre. Cuando acude al mundo de los mortales en busca de compañía, descubre que sí posee un poder, el poder de la brujería, con el que puede transformar a sus rivales en monstruos y amenazar a los mismísimos dioses."
     },
     {
@@ -77,7 +85,8 @@
         "author": "León Tolstói",
         "year": 1865,
         "genre": "Histórico",
-        "coverImage": "https://m.media-amazon.com/images/I/91VQkzNt-gL._SL1500_.jpg",
+        "coverImage": "https://m.media-amazon.com/images/I/91zJ62Y+vDL._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/91zJ62Y+vDL._AC_UY218_.jpg",
         "description": "Con la campaña napoleónica -Austerlitz, Borodinó o el incendio de Moscú- como trasfondo, se narra la historia de dos familias de la nobleza rusa, los Bolkonski y los Rostov, protagonistas de un mundo que empieza a escenificar su propia desaparición."
     },
     {
@@ -87,6 +96,7 @@
         "year": 1986,
         "genre": "Terror",
         "coverImage": "https://m.media-amazon.com/images/I/613UazqBGHL._SL1500_.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/71oswW7kvAL._AC_UY218_.jpg",
         "description": "Un pueblo de Maine está siendo aterrorizado por una fuerza malévola oculta tras la máscara de un payaso. Hartos de ver como las víctimas se suceden una tras otra, siete amigos de una pandilla de la infancia deciden unirse para luchar contra el mal."
     }
 ]

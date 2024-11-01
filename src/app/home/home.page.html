@@ -18,9 +18,9 @@
       <ion-grid>
         <ion-row>
           <ion-col size="6" *ngFor="let book of recentlyAddedBooks">
-            <div class="book-entry-container">
+            <div class="book-entry-container" (click)="seeBookDetail(book.id)">
               <div class="book-image-container">
-                <img [src]="book.coverImage" alt="Portada de {{book.title}}" />
+                <img [src]="book.thumbnail" />
               </div>
               <div class="book-ids">
                 <p class="book-title">{{ book.title }}</p>
@@ -41,9 +41,9 @@
       <ion-grid>
         <ion-row>
           <ion-col size="6" *ngFor="let book of recommendedBooks">
-            <div class="book-entry-container">
+            <div class="book-entry-container" (click)="seeBookDetail(book.id)">
               <div class="book-image-container">
-                <img [src]="book.coverImage" alt="Portada de {{book.title}}" />
+                <img [src]="book.thumbnail" />
               </div>
               <div class="book-ids">
                 <p class="book-title">{{ book.title }}</p>
@@ -57,11 +57,3 @@
   </div>
 
 </ion-content>
-
-<!-- <ion-card class="book-card">
-  <img [src]="book.coverImage" alt="Portada de {{book.title}}" />
-  <ion-card-header>
-    <p class="book-card-title">{{ book.title }}</p>
-    <p class="book-card-subtitle">{{ book.author }}</p>
-  </ion-card-header>
-</ion-card> -->
