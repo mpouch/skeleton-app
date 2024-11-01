@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Book } from 'src/assets/book.model';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
+  recentlyAddedBooks: Book[] = [];
+  recommendedBooks: Book[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get<any[]>('/assets/data.json').subscribe(data => {
+      this.recentlyAddedBooks = data.slice(0, 2);
+      this.recommendedBooks = data.slice(2);
+    })
   }
 
 }

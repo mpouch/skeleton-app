@@ -15,7 +15,21 @@
       <h2 class="section-title">Agregados recientemente</h2>
     </div>
     <div class="section-content-container">
-      Contenido
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let book of recentlyAddedBooks">
+            <div class="book-entry-container">
+              <div class="book-image-container">
+                <img [src]="book.coverImage" alt="Portada de {{book.title}}" />
+              </div>
+              <div class="book-ids">
+                <p class="book-title">{{ book.title }}</p>
+                <p class="book-author">{{ book.author }}</p>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 
@@ -24,8 +38,30 @@
       <h2 class="section-title">Recomendados</h2>
     </div>
     <div class="section-content-container">
-      Contenido
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let book of recommendedBooks">
+            <div class="book-entry-container">
+              <div class="book-image-container">
+                <img [src]="book.coverImage" alt="Portada de {{book.title}}" />
+              </div>
+              <div class="book-ids">
+                <p class="book-title">{{ book.title }}</p>
+                <p class="book-author">{{ book.author }}</p>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 
 </ion-content>
+
+<!-- <ion-card class="book-card">
+  <img [src]="book.coverImage" alt="Portada de {{book.title}}" />
+  <ion-card-header>
+    <p class="book-card-title">{{ book.title }}</p>
+    <p class="book-card-subtitle">{{ book.author }}</p>
+  </ion-card-header>
+</ion-card> -->
