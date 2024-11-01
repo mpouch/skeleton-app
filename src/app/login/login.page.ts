@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username')?.value;
-      this.router.navigate(['/home'], { queryParams: { username }});
+      this.router.navigate(['/tabs'], { queryParams: { username }});
     } else {
       this.loginForm.markAllAsTouched();
     }
