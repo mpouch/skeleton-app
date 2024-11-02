@@ -55,10 +55,12 @@ export class BookPage implements OnInit {
       console.log("Libro eliminado:", this.book);
     }
     this.isInLibrary = !this.isInLibrary;
+    this.checkIfInLibrary(this.book.id);
   }
 
   checkIfInLibrary(id: string) {
     let library = JSON.parse(sessionStorage.getItem('userLibrary') || '[]');
     this.isInLibrary = library.some((b:any) => b.id === +id);
+    console.log("Libro está en biblioteca:", this.isInLibrary, "ID:", id);
   }
 }

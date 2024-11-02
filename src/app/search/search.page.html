@@ -7,25 +7,19 @@
 <ion-content class="ion-padding">
 
   <div class="page-title-container">
-    <h1 class="page-title">Buscar</h1>
+    <h1 class="page-title">Búsqueda</h1>
   </div>
 
-  <div class="recently-added-container">
-    <div class="section-title-container">
-      <h2 class="section-title">Agregados recientemente</h2>
-    </div>
-    <div class="section-content-container">
-      Contenido
-    </div>
-  </div>
+  <ion-item>
+    <ion-input placeholder="Buscar libros..."></ion-input>
+  </ion-item>
 
-  <div class="recommended-container">
-    <div class="section-title-container">
-      <h2 class="section-title">Recomendados</h2>
-    </div>
+  <div class="search-results-container">
     <div class="section-content-container">
-      Contenido
     </div>
+    <ng-template #emptyLibrary>
+      <p>No se encontraron libros.</p>
+    </ng-template>
   </div>
 
 </ion-content>

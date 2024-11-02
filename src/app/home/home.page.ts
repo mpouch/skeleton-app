@@ -9,16 +9,42 @@ import { Book } from 'src/assets/book.model';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
+  allBooks: Book[] = [];
   recentlyAddedBooks: Book[] = [];
   recommendedBooks: Book[] = [];
+  userLibrary: any[] = [];
 
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    this.loadRecommendedBooks();
+  }
+
+  ionViewWillEnter() {
+    this.loadUserLibrary();
+  }
+
+  loadUserLibrary() {
+    const libraryData = sessionStorage.getItem('userLibrary');
+    this.userLibrary = libraryData ? JSON.parse(libraryData) : [];
+    this.recentlyAddedBooks = this.userLibrary.slice(-2).reverse();
+    console.log("Librería usuario cargada")
+    console.log(this.userLibrary);
+    this.filterRecommendedBooks();
+  }
+
+  loadRecommendedBooks() {
     this.http.get<any[]>('/assets/data.json').subscribe(data => {
-      this.recentlyAddedBooks = data.slice(0, 2);
-      this.recommendedBooks = data.slice(2);
+      this.allBooks = data;
+      this.filterRecommendedBooks();
     })
+    console.log("Libros recomendados cargados")
+  }
+
+  filterRecommendedBooks() {
+    const libraryIds = this.userLibrary.map(book => book.id);
+    this.recommendedBooks = this.allBooks.filter(book => !libraryIds.includes(book.id));
+    console.log("Libros filtrados")
   }
 
   seeBookDetail(bookId: number) {

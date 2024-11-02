@@ -14,7 +14,7 @@
     <div class="section-title-container">
       <h2 class="section-title">Agregados recientemente</h2>
     </div>
-    <div class="section-content-container">
+    <div class="section-content-container" *ngIf="userLibrary.length > 0; else emptyLibrary">
       <ion-grid>
         <ion-row>
           <ion-col size="6" *ngFor="let book of recentlyAddedBooks">
@@ -31,6 +31,9 @@
         </ion-row>
       </ion-grid>
     </div>
+    <ng-template #emptyLibrary>
+      <p>No tienes libros en tu biblioteca</p>
+    </ng-template>
   </div>
 
   <div class="recommended-container">
