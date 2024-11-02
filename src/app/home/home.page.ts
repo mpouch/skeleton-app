@@ -14,6 +14,8 @@ export class HomePage {
   recommendedBooks: Book[] = [];
   userLibrary: any[] = [];
 
+  isLoading: boolean = true;
+
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
@@ -34,11 +36,15 @@ export class HomePage {
   }
 
   loadRecommendedBooks() {
-    this.http.get<any[]>('/assets/data.json').subscribe(data => {
-      this.allBooks = data;
-      this.filterRecommendedBooks();
-    })
-    console.log("Libros recomendados cargados")
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.http.get<any[]>('/assets/data.json').subscribe(data => {
+        this.allBooks = data;
+        this.filterRecommendedBooks();
+        this.isLoading = false;
+      });
+    }, 2000);
   }
 
   filterRecommendedBooks() {

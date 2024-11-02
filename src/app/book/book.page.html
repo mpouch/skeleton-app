@@ -18,7 +18,7 @@
     </div>
 
     <div class="add-btn-container">
-      <ion-button expand="block" (click)="addToLibrary()" [color]="isInLibrary ? 'danger' : 'primary'">
+      <ion-button #addButton expand="block" (click)="addToLibrary()" [color]="isInLibrary ? 'danger' : 'primary'">
         {{ isInLibrary ? 'Eliminar de la biblioteca' : 'Agregar a la biblioteca' }}
       </ion-button>
     </div>

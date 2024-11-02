@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-book',
@@ -8,11 +9,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./book.page.scss'],
 })
 export class BookPage implements OnInit {
+  @ViewChild('addButton', { read: ElementRef }) addButton?: ElementRef<HTMLIonButtonElement>;
+
   book: any;
   isLoading: boolean = true;
   isInLibrary: boolean = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private animationCtrl: AnimationController) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -56,11 +59,29 @@ export class BookPage implements OnInit {
     }
     this.isInLibrary = !this.isInLibrary;
     this.checkIfInLibrary(this.book.id);
+
+    this.animateButton();
   }
 
   checkIfInLibrary(id: string) {
     let library = JSON.parse(sessionStorage.getItem('userLibrary') || '[]');
-    this.isInLibrary = library.some((b:any) => b.id === +id);
+    this.isInLibrary = library.some((b: any) => b.id === +id);
     console.log("Libro está en biblioteca:", this.isInLibrary, "ID:", id);
+  }
+
+  animateButton() {
+    if (this.addButton) {
+      const buttonAnimation = this.animationCtrl
+        .create()
+        .addElement(this.addButton.nativeElement)
+        .duration(100)
+        .keyframes([
+          { offset: 0, transform: 'scale(1)', opacity: '1' },
+          { offset: 0.5, transform: 'scale(0.8)', opacity: '1' },
+          { offset: 1, transform: 'scale(1)', opacity: '1' },
+        ]);
+
+      buttonAnimation.play()
+    }
   }
 }

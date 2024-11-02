@@ -6,57 +6,65 @@
 
 <ion-content class="ion-padding">
 
-  <div class="page-title-container">
-    <h1 class="page-title">Inicio</h1>
+  <div *ngIf="!isLoading">
+    <div class="page-title-container">
+      <h1 class="page-title">Inicio</h1>
+    </div>
+  
+    <div class="recently-added-container">
+      <div class="section-title-container">
+        <h2 class="section-title">Agregados recientemente</h2>
+      </div>
+      <div class="section-content-container" *ngIf="userLibrary.length > 0; else emptyLibrary">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let book of recentlyAddedBooks">
+              <div class="book-entry-container" (click)="seeBookDetail(book.id)">
+                <div class="book-image-container">
+                  <img [src]="book.thumbnail" />
+                </div>
+                <div class="book-ids">
+                  <p class="book-title">{{ book.title }}</p>
+                  <p class="book-author">{{ book.author }}</p>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <ng-template #emptyLibrary>
+        <p>No tienes libros en tu biblioteca</p>
+      </ng-template>
+    </div>
+  
+    <div class="recommended-container">
+      <div class="section-title-container">
+        <h2 class="section-title">Recomendados</h2>
+      </div>
+      <div class="section-content-container">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let book of recommendedBooks">
+              <div class="book-entry-container" (click)="seeBookDetail(book.id)">
+                <div class="book-image-container">
+                  <img [src]="book.thumbnail" />
+                </div>
+                <div class="book-ids">
+                  <p class="book-title">{{ book.title }}</p>
+                  <p class="book-author">{{ book.author }}</p>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
   </div>
 
-  <div class="recently-added-container">
-    <div class="section-title-container">
-      <h2 class="section-title">Agregados recientemente</h2>
-    </div>
-    <div class="section-content-container" *ngIf="userLibrary.length > 0; else emptyLibrary">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6" *ngFor="let book of recentlyAddedBooks">
-            <div class="book-entry-container" (click)="seeBookDetail(book.id)">
-              <div class="book-image-container">
-                <img [src]="book.thumbnail" />
-              </div>
-              <div class="book-ids">
-                <p class="book-title">{{ book.title }}</p>
-                <p class="book-author">{{ book.author }}</p>
-              </div>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-    <ng-template #emptyLibrary>
-      <p>No tienes libros en tu biblioteca</p>
-    </ng-template>
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando...</p>
   </div>
 
-  <div class="recommended-container">
-    <div class="section-title-container">
-      <h2 class="section-title">Recomendados</h2>
-    </div>
-    <div class="section-content-container">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6" *ngFor="let book of recommendedBooks">
-            <div class="book-entry-container" (click)="seeBookDetail(book.id)">
-              <div class="book-image-container">
-                <img [src]="book.thumbnail" />
-              </div>
-              <div class="book-ids">
-                <p class="book-title">{{ book.title }}</p>
-                <p class="book-author">{{ book.author }}</p>
-              </div>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </div>
 
 </ion-content>

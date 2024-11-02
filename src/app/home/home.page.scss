@@ -45,3 +45,16 @@
 .book-author {
   color: rgb(105, 105, 105);
 }
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.loading-container ion-spinner {
+  width: 100px;
+  height: 100px;
+}
