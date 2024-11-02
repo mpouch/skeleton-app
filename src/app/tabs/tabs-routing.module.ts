@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
       },
       {
+        path: 'search/book/:id',
+        loadChildren: () => import('../book/book.module').then(m => m.BookPageModule)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

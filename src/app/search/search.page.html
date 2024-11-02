@@ -11,15 +11,29 @@
   </div>
 
   <ion-item>
-    <ion-input placeholder="Buscar libros..."></ion-input>
+    <ion-input placeholder="Buscar libros..." (ionInput)="onSearchChange($event)"></ion-input>
   </ion-item>
 
-  <div class="search-results-container">
-    <div class="section-content-container">
-    </div>
-    <ng-template #emptyLibrary>
-      <p>No se encontraron libros.</p>
-    </ng-template>
+  <div class="search-results-container" *ngIf="searchResults.length > 0; else emptySearch">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let book of searchResults">
+          <div class="book-entry-container" (click)="seeBookDetail(book.id)">
+            <div class="book-image-container">
+              <img [src]="book.thumbnail" />
+            </div>
+            <div class="book-ids">
+              <p class="book-title">{{ book.title }}</p>
+              <p class="book-author">{{ book.author }}</p>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
+
+  <ng-template #emptySearch>
+    <p>No se encontraron libros.</p>
+  </ng-template>
 
 </ion-content>
