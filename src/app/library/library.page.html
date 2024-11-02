@@ -10,13 +10,28 @@
     <h1 class="page-title">Biblioteca</h1>
   </div>
 
+
   <div class="genre-container">
-    <div class="section-title-container">
-      <h2 class="section-title">Terror</h2>
+    <div class="section-content-container" *ngIf="userLibrary.length > 0; else emptyLibrary">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let book of userLibrary">
+            <div class="book-entry-container" (click)="seeBookDetail(book.id)">
+              <div class="book-image-container">
+                <img [src]="book.thumbnail" />
+              </div>
+              <div class="book-ids">
+                <p class="book-title">{{ book.title }}</p>
+                <p class="book-author">{{ book.author }}</p>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
-    <div class="section-content-container">
-      No hay contenido.
-    </div>
+    <ng-template #emptyLibrary>
+      <p>No tienes libros en tu biblioteca.</p>
+    </ng-template>
   </div>
 
 </ion-content>

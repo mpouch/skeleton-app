@@ -10,7 +10,7 @@
     <div class="book-cover-container">
       <img [src]="book.coverImage" />
     </div>
-  
+
     <div class="book-titles-container">
       <p class="book-title">{{ book?.title }}</p>
       <p class="book-author">{{ book?.author }}</p>
@@ -18,14 +18,16 @@
     </div>
 
     <div class="add-btn-container">
-      <ion-button expand="block">Agregar a la biblioteca</ion-button>
+      <ion-button expand="block" (click)="addToLibrary()" [color]="isInLibrary ? 'danger' : 'primary'">
+        {{ isInLibrary ? 'Eliminar de la biblioteca' : 'Agregar a la biblioteca' }}
+      </ion-button>
     </div>
-    
+
     <div class="book-details-container">
       <p class="book-subsection">Género</p>
       <p>{{ book?.genre }}</p>
     </div>
-  
+
     <div class="book-description-container">
       <p class="book-subsection">Descripción</p>
       <p>{{ book?.description }}</p>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Book } from 'src/assets/book.model';
 
 @Component({
   selector: 'app-library',
@@ -8,14 +7,25 @@ import { Book } from 'src/assets/book.model';
   styleUrls: ['./library.page.scss'],
 })
 export class LibraryPage implements OnInit {
-  userLibrary: Book[] = [];
+  userLibrary: any[] = [];
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.loadUserLibrary();
+  }
+
+  ionViewWillEnter() {
+    this.loadUserLibrary();
+  }
+
+  loadUserLibrary() {
+    const libraryData = sessionStorage.getItem('userLibrary');
+    this.userLibrary = libraryData ? JSON.parse(libraryData) : [];
+    console.log(this.userLibrary);
   }
 
   seeBookDetail(bookId: number) {
-    this.router.navigate([`/tabs/home/book/${bookId}`]);
+    this.router.navigate([`/tabs/library/book/${bookId}`]);
   }
 }
