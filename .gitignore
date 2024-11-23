@@ -72,3 +72,6 @@ Thumbs.db
 # Docker
 Dockerfile
 docker-compose.yml
+
+# Android, capacitor, cordova
+/android
