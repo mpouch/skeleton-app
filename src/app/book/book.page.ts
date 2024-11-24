@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ApiclientService } from '../services/apiclient.service';
 import { AnimationController } from '@ionic/angular';
 import { ServiceDBService } from '../services/service-db.service';
 
@@ -18,7 +19,7 @@ export class BookPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
+    private apiClient: ApiclientService,
     private animationCtrl: AnimationController,
     private dbService: ServiceDBService,
   ) { }
@@ -46,7 +47,7 @@ export class BookPage implements OnInit {
       this.book = books.find(book => book.isbn === +isbn);
   
       if (!this.book) {
-        this.http.get<any[]>('assets/data.json').subscribe(data => {
+        this.apiClient.getAllBooks().subscribe(data => {
           this.book = data.find(book => book.isbn === +isbn);
           this.isLoading = false;
           if (!this.book) {

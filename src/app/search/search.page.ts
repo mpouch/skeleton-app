@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/assets/book.model';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ApiclientService } from '../services/apiclient.service';
 
 @Component({
   selector: 'app-search',
@@ -13,16 +13,18 @@ export class SearchPage implements OnInit {
   searchResults: Book[] = [];
   searchTerm: string = '';
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private apiClient: ApiclientService) { }
 
   ngOnInit() {
     this.loadAllBooks();
   }
 
   loadAllBooks() {
-    this.http.get<Book[]>('/assets/data.json').subscribe(data => {
+    this.apiClient.getAllBooks().subscribe(data => {
       this.allBooks = data;
-    })
+    }, error => {
+      console.error('Error al cargar los libros', error);
+    });
   }
 
   onSearchChange(event: any) {
@@ -36,7 +38,8 @@ export class SearchPage implements OnInit {
     } else {
       this.searchResults = this.allBooks.filter(book =>
         book.title.toLowerCase().includes(this.searchTerm) ||
-        book.author.toLowerCase().includes(this.searchTerm)
+        book.author.toLowerCase().includes(this.searchTerm) ||
+        book.genre.toLocaleLowerCase().includes(this.searchTerm)
       );
     }
   }
