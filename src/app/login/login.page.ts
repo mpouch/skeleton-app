@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Validators, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private authGuard: AuthGuardService) {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, longitudValida]],
       password: ['', [Validators.required, validarContrasenna]]
@@ -24,6 +25,7 @@ export class LoginPage implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      AuthGuardService.authenticate();
       const username = this.loginForm.get('username')?.value;
       this.router.navigate(['/tabs'], { queryParams: { username }});
     } else {
