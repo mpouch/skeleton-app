@@ -13,16 +13,21 @@ export class ServiceDBService {
 
   createBook: string = `CREATE TABLE IF NOT EXISTS book(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    isbn INTEGER,
     title TEXT,
     author TEXT,
     year INTEGER,
-    description TEXT,
-    coverImage TEXT
+    genre TEXT,
+    coverImage TEXT,
+    thumbnail TEXT,
+    description TEXT
   )`;
 
-  addBook: string = `INSERT INTO book (title, author, year, description, coverImage) VALUES (?, ?, ?, ?, ?)`;
+  addBook: string = `INSERT INTO book (isbn, title, author, year, genre, coverImage, thumbnail, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  listBook = new BehaviorSubject([]);
+  deleteBook: string = `DELETE FROM book WHERE isbn = ?`;
+
+  listBook = new BehaviorSubject<Books[]>([]);
 
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -40,7 +45,7 @@ export class ServiceDBService {
 
         this.createTables();
       }).catch(e => {
-        this.presentToast("Error DB: " + e);
+        this.presentToast("Error al crear base de datos: " + e);
       })
     })
   }
@@ -48,12 +53,10 @@ export class ServiceDBService {
   async createTables() {
     try {
       await this.database.executeSql(this.createBook, []);
-      await this.database.executeSql(this.addBook, []);
       this.loadBooks();
-
       this.isDBReady.next(true);
     } catch (e) {
-      this.presentToast("Error: " + e);
+      this.presentToast("Error al crear tablas: " + e);
     }
   }
 
@@ -64,34 +67,49 @@ export class ServiceDBService {
         for (var i = 0; i < res.rows.length; i++) {
           books.push({
             id: res.rows.item(i).id,
+            isbn: res.rows.item(i).isbn,
             title: res.rows.item(i).title,
             author: res.rows.item(i).author,
             year: res.rows.item(i).year,
             description: res.rows.item(i).description,
-            coverImage: res.rows.item(i).coverImage
+            coverImage: res.rows.item(i).coverImage,
+            genre: res.rows.item(i).genre,
+            thumbnail: res.rows.item(i).thumbnail
           })
         }
       }
       this.listBook.next(books as any);
     })
   }
+  
 
   async insertBook(book: Books) {
     try {
-      await this.database.executeSql(this.addBook, [book.title, book.author, book.year, book.description, book.coverImage]);
+      await this.database.executeSql(this.addBook, [book.isbn, book.title, book.author, book.year, book.genre, book.coverImage, book.thumbnail, book.description]);
       this.loadBooks();
       this.presentToast('Libro guardado con éxito');
     } catch (e) {
-      this.presentToast('Error: ' + e);
+      this.presentToast('Error al guardar libro: ' + e);
     }
   }
-  
+
+  async removeBook(isbn: number) {
+    try {
+      await this.database.executeSql(this.deleteBook, [isbn]);
+      this.loadBooks();
+      this.presentToast('Libro eliminado con éxito');
+    } catch (e) {
+      this.presentToast('Error al eliminar libro: ' + e);
+    }
+  }
+
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
-      icon: 'globe'
+      icon: 'globe',
+      position: 'top'
     });
 
     await toast.present();

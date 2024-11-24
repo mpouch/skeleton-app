@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServiceDBService } from '../services/service-db.service';
 
 @Component({
   selector: 'app-library',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class LibraryPage implements OnInit {
   userLibrary: any[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dbService: ServiceDBService) { }
 
   ngOnInit() {
     this.loadUserLibrary();
@@ -20,12 +21,13 @@ export class LibraryPage implements OnInit {
   }
 
   loadUserLibrary() {
-    const libraryData = sessionStorage.getItem('userLibrary');
-    this.userLibrary = libraryData ? JSON.parse(libraryData) : [];
-    console.log(this.userLibrary);
+    this.dbService.fetchBooks().subscribe(books => {
+      this.userLibrary = books;
+      console.log(this.userLibrary);
+    });
   }
 
-  seeBookDetail(bookId: number) {
-    this.router.navigate([`/tabs/library/book/${bookId}`]);
+  seeBookDetail(isbn: number) {
+    this.router.navigate([`/tabs/library/book/${isbn}`]);
   }
 }

@@ -13,7 +13,7 @@ const routes: Routes = [
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'home/book/:id',
+        path: 'home/book/:isbn',
         loadChildren: () => import('../book/book.module').then(m => m.BookPageModule)
       },
       {
@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: () => import('../library/library.module').then(m => m.LibraryPageModule)
       },
       {
-        path: 'library/book/:id',
+        path: 'library/book/:isbn',
         loadChildren: () => import('../book/book.module').then(m => m.BookPageModule)
       },
       {
@@ -29,7 +29,7 @@ const routes: Routes = [
         loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
       },
       {
-        path: 'search/book/:id',
+        path: 'search/book/:isbn',
         loadChildren: () => import('../book/book.module').then(m => m.BookPageModule)
       },
       {

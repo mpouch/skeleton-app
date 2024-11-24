@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AnimationController } from '@ionic/angular';
+import { ServiceDBService } from '../services/service-db.service';
 
 @Component({
   selector: 'app-book',
@@ -15,58 +16,88 @@ export class BookPage implements OnInit {
   isLoading: boolean = true;
   isInLibrary: boolean = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private animationCtrl: AnimationController) { }
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private animationCtrl: AnimationController,
+    private dbService: ServiceDBService,
+  ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.loadBookData(id);
+    const isbn = this.route.snapshot.paramMap.get('isbn');
+    if (isbn) {
+      this.loadBookData(isbn);
     } else {
-      console.log("ID no encontrado");
+      console.error("ISBN no encontrado");
     }
   }
 
   ionViewWillEnter() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.checkIfInLibrary(id);
+    const isbn = this.route.snapshot.paramMap.get('isbn');
+    if (isbn) {
+      this.checkIfInLibraryByISBN(+isbn);
     } else {
-      console.log("ID no encontrado");
+      console.error("ISBN no encontrado");
     }
   }
 
-  loadBookData(id: string) {
-    this.http.get<any[]>('assets/data.json').subscribe(data => {
-      this.book = data.find(book => book.id === +id);
-      this.isLoading = false;
-    }, error => {
-      console.error("Error al cargar los datos:", error);
-      this.isLoading = false;
+  loadBookData(isbn: string) {
+    this.dbService.fetchBooks().subscribe(books => {
+      this.book = books.find(book => book.isbn === +isbn);
+  
+      if (!this.book) {
+        this.http.get<any[]>('assets/data.json').subscribe(data => {
+          this.book = data.find(book => book.isbn === +isbn);
+          this.isLoading = false;
+          if (!this.book) {
+            console.error("Libro no encontrado");
+          }
+        });
+      } else {
+        this.isLoading = false;
+      }
+    });
+  }
+
+  checkIfInLibraryByISBN(isbn: number) {
+    this.dbService.fetchBooks().subscribe((books) => {
+      this.isInLibrary = books.some((book) => book.isbn === isbn);
+      console.log("Libro está en la biblioteca:", this.isInLibrary, "ISBN:", isbn);
+    }, (error) => {
+      console.error("Error al verificar el estado del libro:", error);
     });
   }
 
   addToLibrary() {
-    let library = JSON.parse(sessionStorage.getItem('userLibrary') || '[]');
+    if (!this.book) {
+      return;
+    }
+
+    const { id, ...bookData } = this.book;
 
     if (!this.isInLibrary) {
-      library.push(this.book);
-      sessionStorage.setItem('userLibrary', JSON.stringify(library));
-      console.log("Libro agregado:", this.book);
+      this.dbService.insertBook(this.book).then(() => {
+        console.log("Libro agregado a la biblioteca:", this.book);
+        this.isInLibrary = true;
+        this.animateButton();
+      }).catch((error) => console.error("Error al agregar el libro:", error));
     } else {
-      library = library.filter((b: any) => b.id !== this.book.id);
-      sessionStorage.setItem('userLibrary', JSON.stringify(library));
-      console.log("Libro eliminado:", this.book);
+      this.removeFromLibrary();
     }
-    this.isInLibrary = !this.isInLibrary;
-    this.checkIfInLibrary(this.book.id);
-
-    this.animateButton();
   }
-
-  checkIfInLibrary(id: string) {
-    let library = JSON.parse(sessionStorage.getItem('userLibrary') || '[]');
-    this.isInLibrary = library.some((b: any) => b.id === +id);
-    console.log("Libro está en biblioteca:", this.isInLibrary, "ID:", id);
+  
+  removeFromLibrary() {
+    if (!this.book) {
+      return;
+    }
+  
+    if (this.isInLibrary) {
+      this.dbService.removeBook(this.book.isbn).then(() => {
+        console.log("Libro eliminado de la biblioteca:", this.book);
+        this.isInLibrary = false;
+        this.animateButton();
+      }).catch((error) => console.error("Error al eliminar el libro:", error));
+    }
   }
 
   animateButton() {
@@ -81,7 +112,7 @@ export class BookPage implements OnInit {
           { offset: 1, transform: 'scale(1)', opacity: '1' },
         ]);
 
-      buttonAnimation.play()
+      buttonAnimation.play();
     }
   }
 }

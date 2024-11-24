@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Book } from 'src/assets/book.model';
+import { ServiceDBService } from 'src/app/services/service-db.service';
+import { Books } from '../services/books';
 
 @Component({
   selector: 'app-home',
@@ -9,52 +9,48 @@ import { Book } from 'src/assets/book.model';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  allBooks: Book[] = [];
-  recentlyAddedBooks: Book[] = [];
-  recommendedBooks: Book[] = [];
-  userLibrary: any[] = [];
+  allBooks: Books[] = [];
+  recentlyAddedBooks: Books[] = [];
+  recommendedBooks: Books[] = [];
+  userLibrary: Books[] = [];
 
   isLoading: boolean = true;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private router: Router, private serviceDB: ServiceDBService) { }
 
   ngOnInit() {
-    this.loadRecommendedBooks();
+    this.loadBooks();
   }
 
   ionViewWillEnter() {
     this.loadUserLibrary();
   }
 
-  loadUserLibrary() {
-    const libraryData = sessionStorage.getItem('userLibrary');
-    this.userLibrary = libraryData ? JSON.parse(libraryData) : [];
-    this.recentlyAddedBooks = this.userLibrary.slice(-2).reverse();
-    console.log("Librería usuario cargada")
-    console.log(this.userLibrary);
-    this.filterRecommendedBooks();
-  }
-
-  loadRecommendedBooks() {
+  loadBooks() {
     this.isLoading = true;
 
-    setTimeout(() => {
-      this.http.get<any[]>('/assets/data.json').subscribe(data => {
-        this.allBooks = data;
-        this.filterRecommendedBooks();
-        this.isLoading = false;
-      });
-    }, 2000);
+    this.serviceDB.fetchBooks().subscribe((books: Books[]) => {
+      this.allBooks = books;
+      this.isLoading = false;
+      this.filterRecommendedBooks();
+    });
+  }
+
+  loadUserLibrary() {
+    this.serviceDB.fetchBooks().subscribe((books: Books[]) => {
+      this.userLibrary = books;
+      this.recentlyAddedBooks = this.userLibrary.slice(-2).reverse();
+      this.filterRecommendedBooks();
+    });
   }
 
   filterRecommendedBooks() {
-    const libraryIds = this.userLibrary.map(book => book.id);
-    this.recommendedBooks = this.allBooks.filter(book => !libraryIds.includes(book.id));
-    console.log("Libros filtrados")
+    const libraryISBNs = this.userLibrary.map(book => book.isbn);
+    this.recommendedBooks = this.allBooks.filter(book => !libraryISBNs.includes(book.isbn));
+    console.log("Libros filtrados");
   }
 
-  seeBookDetail(bookId: number) {
-    this.router.navigate([`/tabs/home/book/${bookId}`]);
+  seeBookDetail(isbn: number) {
+    this.router.navigate([`/tabs/home/book/${isbn}`]);
   }
-
 }

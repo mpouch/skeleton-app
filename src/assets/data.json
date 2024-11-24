@@ -1,6 +1,7 @@
 [
     {
         "id": 1,
+        "isbn": 100,
         "title": "Cien años de soledad",
         "author": "Gabriel García Márquez",
         "year": 1967,
@@ -11,6 +12,7 @@
     },
     {
         "id": 2,
+        "isbn": 110,
         "title": "1984",
         "author": "George Orwell",
         "year": 1949,
@@ -21,6 +23,7 @@
     },
     {
         "id": 3,
+        "isbn": 120,
         "title": "El gran Gatsby",
         "author": "F. Scott Fitzgerald",
         "year": 1925,
@@ -31,6 +34,7 @@
     },
     {
         "id": 4,
+        "isbn": 130,
         "title": "Rayuela",
         "author": "Julio Cortázar",
         "year": 1963,
@@ -41,6 +45,7 @@
     },
     {
         "id": 5,
+        "isbn": 140,
         "title": "Orgullo y prejuicio",
         "author": "Jane Austen",
         "year": 1813,
@@ -51,6 +56,7 @@
     },
     {
         "id": 6,
+        "isbn": 150,
         "title": "Cumbres borrascosas",
         "author": "Emily Brontë",
         "year": 1847,
@@ -61,6 +67,7 @@
     },
     {
         "id": 7,
+        "isbn": 160,
         "title": "El señor de los anillos",
         "author": "J.R.R Tolkien",
         "year": 1957,
@@ -71,6 +78,7 @@
     },
     {
         "id": 8,
+        "isbn": 170,
         "title": "Circe",
         "author": "Madeline Miller",
         "year": 2018,
@@ -81,6 +89,7 @@
     },
     {
         "id": 9,
+        "isbn": 180,
         "title": "Guerra y paz",
         "author": "León Tolstói",
         "year": 1865,
@@ -91,6 +100,7 @@
     },
     {
         "id": 10,
+        "isbn": 190,
         "title": "It (Eso)",
         "author": "Stephen King",
         "year": 1986,
