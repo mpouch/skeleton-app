@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceDBService } from 'src/app/services/service-db.service';
+import { ApiclientService } from '../services/apiclient.service';
 import { Books } from '../services/books';
 
 @Component({
@@ -16,7 +17,7 @@ export class HomePage {
 
   isLoading: boolean = true;
 
-  constructor(private router: Router, private serviceDB: ServiceDBService) { }
+  constructor(private router: Router, private serviceDB: ServiceDBService, private apiClient: ApiclientService) { }
 
   ngOnInit() {
     this.loadBooks();
@@ -29,11 +30,11 @@ export class HomePage {
   loadBooks() {
     this.isLoading = true;
 
-    this.serviceDB.fetchBooks().subscribe((books: Books[]) => {
+    this.apiClient.getAllBooks().subscribe((books: Books[]) => {
       this.allBooks = books;
       this.isLoading = false;
       this.filterRecommendedBooks();
-    });
+    })
   }
 
   loadUserLibrary() {
@@ -45,10 +46,22 @@ export class HomePage {
   }
 
   filterRecommendedBooks() {
-    const libraryISBNs = this.userLibrary.map(book => book.isbn);
-    this.recommendedBooks = this.allBooks.filter(book => !libraryISBNs.includes(book.isbn));
-    console.log("Libros filtrados");
+    if (this.userLibrary.length === 0) {
+      this.recommendedBooks = this.allBooks.slice(0, 10);
+    } else {
+      const libraryGenres = new Set(this.userLibrary.map(book => book.genre.toLowerCase()));
+      const libraryISBNs = new Set(this.userLibrary.map(book => book.isbn));  
+      this.recommendedBooks = this.allBooks.filter(book => {
+        const matchesGenre = libraryGenres.has(book.genre.toLowerCase());
+        const notInLibrary = !libraryISBNs.has(book.isbn);
+        return matchesGenre && notInLibrary;
+      });
+    }
+  
+    console.log("Libros recomendados actualizados:", this.recommendedBooks);
   }
+  
+  
 
   seeBookDetail(isbn: number) {
     this.router.navigate([`/tabs/home/book/${isbn}`]);
