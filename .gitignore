@@ -75,3 +75,8 @@ docker-compose.yml
 
 # Android, capacitor, cordova
 /android
+
+# Cypress
+/cypress/screenshots
+/cypress/videos
+/cypress/results
